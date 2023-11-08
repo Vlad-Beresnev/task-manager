@@ -4,6 +4,8 @@ const tasks = require('./routes/tasks')
 const connectDB = require('./db/connect')
 // import secret string
 require('dotenv').config()
+const notFound = require('./middleware/not-found')
+const errorHandlerMiddleware = require('./middleware/error-handler')
 
 // middleware:
 // Connect Frontend 
@@ -23,6 +25,8 @@ app.use('/api/v1/tasks', tasks)
 // app.patch('api/v1/tasks/:id')  - update task
 // app.delete('api/v1/tasks/:id') - delete task
 
+app.use(notFound)
+app.use(errorHandlerMiddleware)
 
 const port = 3000
 
